@@ -27,8 +27,8 @@ async def cmd_start(message: types.Message):
         f"Привет, <b>{message.from_user.first_name}</b>!\n\n"
         f"💰 Баланс: <b>{int(user['balance'])}</b> монет\n\n"
         f"⚽ Реальные матчи с реальными коэффициентами\n"
-        f"🎲 Быстрые игры: монетка, кости, рулетка\n"
-        f"💸 Кэшаут — забери выигрыш досрочно\n\n"
+        f"🎲 Быстрые игры\n"
+        f"💸 Кэшаут\n\n"
         f"👇 Нажми чтобы начать:",
         reply_markup=keyboard, parse_mode="HTML"
     )
@@ -41,15 +41,23 @@ async def cmd_balance(message: types.Message):
 
 
 def run_server():
-    uvicorn.run(fastapi_app, host=SERVER_HOST, port=SERVER_PORT)
+    uvicorn.run(fastapi_app, host=SERVER_HOST, port=SERVER_PORT, log_level="info")
 
 
 async def main():
     await db.init_db()
+
+    print("=" * 50)
+    print(f"BOT_TOKEN: {'SET' if BOT_TOKEN else 'NOT SET!'}")
+    print(f"WEBAPP_URL: {WEBAPP_URL}")
+    print(f"SERVER_PORT: {SERVER_PORT}")
+    print("=" * 50)
+
     server_thread = Thread(target=run_server, daemon=True)
     server_thread.start()
-    print(f"✅ Сервер: http://localhost:{SERVER_PORT}")
+    print(f"✅ Сервер запущен на порту {SERVER_PORT}")
     print("✅ Бот запущен!")
+
     await dp.start_polling(bot)
 
 
