@@ -1,0 +1,160 @@
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #0e1621;
+    color: #fff;
+    min-height: 100vh;
+}
+
+#app { max-width: 480px; margin: 0 auto; padding-bottom: 20px; }
+
+.header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 16px; background: #17212b;
+    border-bottom: 1px solid #2b3e50;
+    position: sticky; top: 0; z-index: 100;
+}
+.header-left { display: flex; align-items: center; gap: 8px; }
+.logo { font-size: 28px; }
+.brand { font-size: 20px; font-weight: 800; color: #5eb5f7; }
+.balance-box {
+    background: #1a3a1a; padding: 8px 16px; border-radius: 20px;
+    font-weight: 700; border: 1px solid #4caf50;
+}
+
+.tabs {
+    display: flex; background: #17212b; padding: 4px;
+    position: sticky; top: 57px; z-index: 99;
+}
+.tab {
+    flex: 1; padding: 10px; border: none; background: transparent;
+    color: #8b9bab; font-size: 13px; font-weight: 600;
+    cursor: pointer; border-radius: 8px; transition: 0.2s;
+}
+.tab.active { background: #5eb5f7; color: #fff; }
+
+.tab-content { display: none; padding: 12px; }
+.tab-content.active { display: block; }
+
+/* Карточки событий */
+.event-card {
+    background: #1e2c3a; border-radius: 12px; padding: 14px;
+    margin-bottom: 10px; border: 1px solid #2b3e50;
+}
+.event-category { font-size: 11px; color: #5eb5f7; font-weight: 600; text-transform: uppercase; }
+.event-teams {
+    display: flex; justify-content: space-between; align-items: center;
+    margin: 10px 0; font-size: 15px; font-weight: 600;
+}
+.vs { color: #8b9bab; font-size: 12px; }
+.odds-row { display: flex; gap: 6px; }
+.odds-btn {
+    flex: 1; padding: 10px; border: 1px solid #2b3e50;
+    background: #17212b; color: #fff; border-radius: 8px;
+    cursor: pointer; text-align: center; transition: 0.2s;
+}
+.odds-btn:active { transform: scale(0.95); }
+.odds-label { font-size: 10px; color: #8b9bab; display: block; }
+.odds-value { font-size: 16px; font-weight: 700; color: #ffc107; }
+
+/* Быстрые игры */
+.quick-game {
+    background: #1e2c3a; border-radius: 12px;
+    margin-bottom: 12px; border: 1px solid #2b3e50; overflow: hidden;
+}
+.game-header {
+    padding: 12px 14px; background: #17212b; font-weight: 700;
+    border-bottom: 1px solid #2b3e50;
+}
+.game-body { padding: 14px; }
+.pick-buttons { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+.pick-btn {
+    flex: 1; min-width: 70px; padding: 10px; border: 2px solid #2b3e50;
+    background: #17212b; color: #fff; border-radius: 10px;
+    font-size: 13px; font-weight: 600; cursor: pointer; text-align: center;
+}
+.pick-btn.small { min-width: 45px; padding: 8px; font-size: 16px; }
+.pick-btn.selected { border-color: #5eb5f7; background: rgba(94,181,247,0.15); }
+.pick-btn.red.selected { border-color: #f44336; }
+.pick-btn.black.selected { border-color: #666; }
+.pick-btn.green.selected { border-color: #4caf50; }
+
+.bet-input {
+    width: 100%; padding: 10px 14px; border: 1px solid #2b3e50;
+    background: #0e1621; color: #fff; border-radius: 8px;
+    font-size: 16px; margin-bottom: 6px; outline: none;
+}
+.bet-input:focus { border-color: #5eb5f7; }
+
+.quick-amounts { display: flex; gap: 6px; margin-bottom: 10px; }
+.quick-amounts button {
+    flex: 1; padding: 6px; border: 1px solid #2b3e50;
+    background: #17212b; color: #8b9bab; border-radius: 6px;
+    font-size: 12px; cursor: pointer;
+}
+
+.play-btn {
+    width: 100%; padding: 14px; border: none;
+    background: linear-gradient(135deg, #5eb5f7, #3a9fe5);
+    color: #fff; border-radius: 10px; font-size: 16px;
+    font-weight: 700; cursor: pointer;
+}
+.play-btn:active { transform: scale(0.98); }
+
+.game-result {
+    text-align: center; font-weight: 600; overflow: hidden;
+    max-height: 0; padding: 0; transition: 0.3s;
+}
+.game-result.show { max-height: 80px; padding: 14px; }
+.game-result.win { background: rgba(76,175,80,0.1); color: #4caf50; }
+.game-result.lose { background: rgba(244,67,54,0.1); color: #f44336; }
+
+/* История ставок */
+.bet-card {
+    background: #1e2c3a; border-radius: 10px; padding: 12px;
+    margin-bottom: 8px; border-left: 3px solid #8b9bab;
+}
+.bet-card.win { border-left-color: #4caf50; }
+.bet-card.lose { border-left-color: #f44336; }
+.bet-card.pending { border-left-color: #ffc107; }
+.bet-header { display: flex; justify-content: space-between; margin-bottom: 6px; }
+.bet-name { font-weight: 600; font-size: 14px; }
+.bet-status { font-size: 12px; font-weight: 700; }
+.bet-details { font-size: 13px; color: #8b9bab; }
+.empty { text-align: center; padding: 40px; color: #8b9bab; }
+
+/* Модалка */
+.modal { position: fixed; top:0; left:0; right:0; bottom:0; z-index: 1000;
+    display: flex; align-items: flex-end; justify-content: center; }
+.modal.hidden { display: none; }
+.modal-bg { position: absolute; top:0;left:0;right:0;bottom:0; background: rgba(0,0,0,0.6); }
+.modal-box {
+    position: relative; background: #17212b; border-radius: 20px 20px 0 0;
+    padding: 20px; width: 100%; max-width: 480px;
+}
+.modal-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+.slip-line { margin-bottom: 6px; font-size: 15px; }
+.slip-line.accent { color: #5eb5f7; font-weight: 600; }
+.slip-line.gold { color: #ffc107; font-weight: 700; font-size: 18px; margin-bottom: 12px; }
+.potential-win {
+    text-align: center; font-size: 18px; font-weight: 700; color: #4caf50;
+    padding: 12px; background: rgba(76,175,80,0.1); border-radius: 10px;
+    margin-bottom: 12px;
+}
+.confirm-btn {
+    width: 100%; padding: 16px; border: none;
+    background: linear-gradient(135deg, #4caf50, #388e3c);
+    color: #fff; border-radius: 12px; font-size: 17px;
+    font-weight: 700; cursor: pointer;
+}
+
+/* Тост */
+.toast {
+    position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+    padding: 12px 24px; border-radius: 12px; font-weight: 600;
+    z-index: 2000; max-width: 90%; text-align: center;
+}
+.toast.hidden { display: none; }
+.toast.success { background: #4caf50; }
+.toast.error { background: #f44336; }
