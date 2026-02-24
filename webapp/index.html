@@ -18,19 +18,27 @@
     </header>
 
     <nav class="tabs">
-        <button class="tab active" onclick="switchTab('sports', this)">⚽ Спорт</button>
-        <button class="tab" onclick="switchTab('quick', this)">🎲 Быстрые</button>
-        <button class="tab" onclick="switchTab('mybets', this)">📋 Ставки</button>
+        <button class="tab active" onclick="switchTab('sports',this)">⚽ Матчи</button>
+        <button class="tab" onclick="switchTab('quick',this)">🎲 Игры</button>
+        <button class="tab" onclick="switchTab('mybets',this)">📋 Ставки</button>
+        <button class="tab" onclick="switchTab('profile',this)">👤</button>
     </nav>
 
-    <!-- Спортивные ставки -->
+    <!-- СПОРТ -->
     <section id="tab-sports" class="tab-content active">
-        <div id="events-list"></div>
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterSport('all',this)">Все</button>
+            <button class="filter-btn" onclick="filterSport('football',this)">⚽</button>
+            <button class="filter-btn" onclick="filterSport('basketball',this)">🏀</button>
+            <button class="filter-btn" onclick="filterSport('tennis',this)">🎾</button>
+            <button class="filter-btn" onclick="filterSport('hockey',this)">🏒</button>
+            <button class="filter-btn" onclick="filterSport('mma',this)">🥊</button>
+        </div>
+        <div id="events-list"><div class="loading">⏳ Загрузка матчей...</div></div>
     </section>
 
-    <!-- Быстрые игры -->
+    <!-- БЫСТРЫЕ ИГРЫ -->
     <section id="tab-quick" class="tab-content">
-        <!-- Монетка -->
         <div class="quick-game">
             <div class="game-header">🪙 Монетка (x1.95)</div>
             <div class="game-body">
@@ -38,58 +46,54 @@
                     <button class="pick-btn" onclick="selectPick('coinflip','heads',this)">👑 Орёл</button>
                     <button class="pick-btn" onclick="selectPick('coinflip','tails',this)">🔢 Решка</button>
                 </div>
-                <input type="number" id="coinflip-amount" class="bet-input" placeholder="Сумма ставки" min="10">
+                <input type="number" id="coinflip-amount" class="bet-input" placeholder="Сумма" min="10">
                 <div class="quick-amounts">
-                    <button onclick="setAmount('coinflip',50)">50</button>
-                    <button onclick="setAmount('coinflip',100)">100</button>
-                    <button onclick="setAmount('coinflip',500)">500</button>
+                    <button onclick="setAmt('coinflip',50)">50</button>
+                    <button onclick="setAmt('coinflip',100)">100</button>
+                    <button onclick="setAmt('coinflip',500)">500</button>
                 </div>
                 <button class="play-btn" onclick="playGame('coinflip')">🎰 Играть</button>
             </div>
             <div id="coinflip-result" class="game-result"></div>
         </div>
-
-        <!-- Кости -->
         <div class="quick-game">
             <div class="game-header">🎲 Кости</div>
             <div class="game-body">
                 <div class="pick-buttons">
-                    <button class="pick-btn" onclick="selectPick('dice','low',this)">⬇️ 1-3 (x1.95)</button>
-                    <button class="pick-btn" onclick="selectPick('dice','high',this)">⬆️ 4-6 (x1.95)</button>
+                    <button class="pick-btn" onclick="selectPick('dice','low',this)">⬇ 1-3 x1.95</button>
+                    <button class="pick-btn" onclick="selectPick('dice','high',this)">⬆ 4-6 x1.95</button>
                 </div>
                 <div class="pick-buttons">
-                    <button class="pick-btn small" onclick="selectPick('dice','1',this)">1️⃣</button>
-                    <button class="pick-btn small" onclick="selectPick('dice','2',this)">2️⃣</button>
-                    <button class="pick-btn small" onclick="selectPick('dice','3',this)">3️⃣</button>
-                    <button class="pick-btn small" onclick="selectPick('dice','4',this)">4️⃣</button>
-                    <button class="pick-btn small" onclick="selectPick('dice','5',this)">5️⃣</button>
-                    <button class="pick-btn small" onclick="selectPick('dice','6',this)">6️⃣</button>
+                    <button class="pick-btn sm" onclick="selectPick('dice','1',this)">1️⃣</button>
+                    <button class="pick-btn sm" onclick="selectPick('dice','2',this)">2️⃣</button>
+                    <button class="pick-btn sm" onclick="selectPick('dice','3',this)">3️⃣</button>
+                    <button class="pick-btn sm" onclick="selectPick('dice','4',this)">4️⃣</button>
+                    <button class="pick-btn sm" onclick="selectPick('dice','5',this)">5️⃣</button>
+                    <button class="pick-btn sm" onclick="selectPick('dice','6',this)">6️⃣</button>
                 </div>
-                <input type="number" id="dice-amount" class="bet-input" placeholder="Сумма ставки" min="10">
+                <input type="number" id="dice-amount" class="bet-input" placeholder="Сумма" min="10">
                 <div class="quick-amounts">
-                    <button onclick="setAmount('dice',50)">50</button>
-                    <button onclick="setAmount('dice',100)">100</button>
-                    <button onclick="setAmount('dice',500)">500</button>
+                    <button onclick="setAmt('dice',50)">50</button>
+                    <button onclick="setAmt('dice',100)">100</button>
+                    <button onclick="setAmt('dice',500)">500</button>
                 </div>
                 <button class="play-btn" onclick="playGame('dice')">🎰 Играть</button>
             </div>
             <div id="dice-result" class="game-result"></div>
         </div>
-
-        <!-- Рулетка -->
         <div class="quick-game">
             <div class="game-header">🎡 Рулетка</div>
             <div class="game-body">
                 <div class="pick-buttons">
                     <button class="pick-btn red" onclick="selectPick('roulette','red',this)">🔴 x2</button>
-                    <button class="pick-btn black" onclick="selectPick('roulette','black',this)">⚫ x2</button>
-                    <button class="pick-btn green" onclick="selectPick('roulette','green',this)">🟢 x35</button>
+                    <button class="pick-btn blk" onclick="selectPick('roulette','black',this)">⚫ x2</button>
+                    <button class="pick-btn grn" onclick="selectPick('roulette','green',this)">🟢 x35</button>
                 </div>
-                <input type="number" id="roulette-amount" class="bet-input" placeholder="Сумма ставки" min="10">
+                <input type="number" id="roulette-amount" class="bet-input" placeholder="Сумма" min="10">
                 <div class="quick-amounts">
-                    <button onclick="setAmount('roulette',50)">50</button>
-                    <button onclick="setAmount('roulette',100)">100</button>
-                    <button onclick="setAmount('roulette',500)">500</button>
+                    <button onclick="setAmt('roulette',50)">50</button>
+                    <button onclick="setAmt('roulette',100)">100</button>
+                    <button onclick="setAmt('roulette',500)">500</button>
                 </div>
                 <button class="play-btn" onclick="playGame('roulette')">🎰 Играть</button>
             </div>
@@ -97,32 +101,47 @@
         </div>
     </section>
 
-    <!-- Мои ставки -->
+    <!-- МОИ СТАВКИ -->
     <section id="tab-mybets" class="tab-content">
         <div id="bets-list"><div class="empty">Ставок пока нет</div></div>
     </section>
 
-    <!-- Модальное окно ставки -->
-    <div id="bet-modal" class="modal hidden">
-        <div class="modal-bg" onclick="closeModal()"></div>
-        <div class="modal-box">
-            <div class="modal-title">📝 Ставка</div>
-            <div id="slip-event" class="slip-line"></div>
-            <div id="slip-pick" class="slip-line accent"></div>
-            <div id="slip-odds" class="slip-line gold"></div>
-            <input type="number" id="bet-amount" class="bet-input" placeholder="Сумма" min="10" oninput="calcWin()">
-            <div class="quick-amounts">
-                <button onclick="document.getElementById('bet-amount').value=50;calcWin()">50</button>
-                <button onclick="document.getElementById('bet-amount').value=100;calcWin()">100</button>
-                <button onclick="document.getElementById('bet-amount').value=250;calcWin()">250</button>
-                <button onclick="document.getElementById('bet-amount').value=500;calcWin()">500</button>
+    <!-- ПРОФИЛЬ -->
+    <section id="tab-profile" class="tab-content">
+        <div class="profile-card">
+            <div class="avatar">👤</div>
+            <div class="pname" id="pname">Игрок</div>
+            <div class="pstats">
+                <div class="pst"><div class="pv" id="st-bal">0</div><div class="pl">Баланс</div></div>
+                <div class="pst"><div class="pv" id="st-bets">0</div><div class="pl">Ставок</div></div>
+                <div class="pst"><div class="pv" id="st-wins">0</div><div class="pl">Побед</div></div>
             </div>
-            <div class="potential-win">Выигрыш: <span id="potential-win">0</span> 🪙</div>
+        </div>
+        <div class="stitle">🏆 Лидерборд</div>
+        <div id="leaderboard"></div>
+    </section>
+
+    <!-- МОДАЛКА -->
+    <div id="bet-modal" class="modal hidden">
+        <div class="mbg" onclick="closeModal()"></div>
+        <div class="mbox">
+            <div class="mtitle">📝 Ставка <span class="mclose" onclick="closeModal()">✕</span></div>
+            <div id="s-event" class="sline"></div>
+            <div id="s-pick" class="sline accent"></div>
+            <div id="s-odds" class="sline gold"></div>
+            <input type="number" id="bet-amount" class="bet-input" placeholder="Сумма ставки" min="10" oninput="calcWin()">
+            <div class="quick-amounts">
+                <button onclick="sa(50)">50</button>
+                <button onclick="sa(100)">100</button>
+                <button onclick="sa(250)">250</button>
+                <button onclick="sa(500)">500</button>
+                <button onclick="sa('max')">MAX</button>
+            </div>
+            <div class="pot-win">Выигрыш: <span id="pot-win">0</span> 🪙</div>
             <button class="confirm-btn" onclick="confirmBet()">✅ Поставить</button>
         </div>
     </div>
 
-    <!-- Уведомление -->
     <div id="toast" class="toast hidden"></div>
 </div>
 <script src="/webapp/app.js"></script>
